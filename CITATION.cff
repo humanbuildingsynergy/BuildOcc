@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+title: "BuildOcc: ATUS-grounded LLM occupant agents for building energy simulation"
+message: "If you use this software, please cite it using the metadata from this file."
+type: software
+authors:
+  - family-names: Jung
+    given-names: Wooyoung
+    email: j2prosperous@gmail.com
+    affiliation: "University of Arizona"
+    # orcid: "https://orcid.org/0000-0000-0000-0000"  # TODO: add your ORCID iD
+repository-code: "https://github.com/humanbuildingsynergy/BuildOcc"
+license: Apache-2.0
+version: 1.0.0
+date-released: "2026-07-04"
+keywords:
+  - occupant behavior
+  - building energy simulation
+  - large language models
+  - agent-based modeling
+  - American Time Use Survey
+  - demand response
+abstract: >-
+  BuildOcc provides LLM-based occupant agents for building energy simulation,
+  grounded in American Time Use Survey (ATUS) microdata. It offers a Python
+  agent library, a REST API, and an MCP server, with ATUS-grounded activity
+  scheduling across four demographic strata, persona generation with EIA RECS
+  appliance priors, a Park et al. (2023) memory stream, a demand-response signal
+  typology, and two-tier behavioral and energy validation metrics.
+# Once a Zenodo DOI is minted for the v1.0.0 release, add it here:
+# identifiers:
+#   - type: doi
+#     value: 10.5281/zenodo.XXXXXXX
+#     description: "Archived v1.0.0 release"
