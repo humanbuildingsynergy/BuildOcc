@@ -1,0 +1,127 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "buildocc"
+version = "1.0.0"
+description = "ATUS-grounded LLM occupant agents for building energy simulation"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+authors = [{ name = "Wooyoung Jung", email = "j2prosperous@gmail.com" }]
+keywords = [
+    "building energy",
+    "occupant behavior",
+    "LLM agents",
+    "ATUS",
+    "MCP",
+    "demand response",
+    "generative agents",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Typing :: Typed",
+]
+
+dependencies = [
+    # Core agent
+    "pydantic>=2.0",
+    # LLM providers (optional at runtime — import is lazy)
+    "anthropic>=0.30",
+    "openai>=1.30",
+    # REST API layer
+    "fastapi>=0.111",
+    "uvicorn[standard]>=0.30",
+    "httpx>=0.27",
+    # Persistence
+    "sqlalchemy>=2.0",
+    # MCP layer
+    "mcp>=1.0",
+    # Data processing
+    "pandas>=2.1",
+    "numpy>=1.26",
+    # Environment / secrets
+    "python-dotenv>=1.0",
+    # CLI configuration
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.4",
+    "mypy>=1.10",
+]
+google = [
+    # Google Gemini provider: pip install "buildocc[google]"
+    "google-generativeai>=0.8",
+]
+analysis = [
+    # Extra deps needed only when running scripts/atus/analyze.py
+    "scipy>=1.12",
+    "ipykernel>=6.0",
+    "jupyterlab>=4.0",
+]
+
+[project.scripts]
+buildocc     = "occupant_agent.cli:main"
+buildocc-api = "occupant_agent.api.app:run"
+buildocc-mcp = "occupant_agent.mcp_server.server:main_sync"
+
+# ── Plugin entry points ───────────────────────────────────────────────────────
+# Third-party packages declare their extensions here so they are discovered
+# automatically after `pip install` — no import statement needed by users.
+#
+# Format for a third-party package's pyproject.toml:
+#   [project.entry-points."occupant_agent.strata"]
+#   P5 = "my_package.personas:LowIncomeElderlyAlone"   # BasePersona subclass
+#
+#   [project.entry-points."occupant_agent.schedulers"]
+#   homer = "my_package.schedulers:HomerScheduler"     # BaseScheduler subclass
+#
+# Built-in schedulers are declared here as the canonical example.
+# Built-in strata (O1–O4) are registered via import-time decorators in
+# persona.py (they are functools.partial factories, not importable classes).
+
+[project.entry-points."occupant_agent.schedulers"]
+atus  = "occupant_agent.grounding.scheduler:ActivityScheduler"
+fixed = "occupant_agent.grounding.fixed_schedule:FixedScheduleScheduler"
+
+[project.urls]
+Repository = "https://github.com/humanbuildingsynergy/BuildOcc"
+Issues = "https://github.com/humanbuildingsynergy/BuildOcc/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["occupant_agent*"]
+
+[tool.setuptools.package-data]
+occupant_agent = ["data/*.csv", "data/*.txt", "py.typed"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "strict"
+markers = [
+    "integration: marks tests that require a live LLM API key",
+]

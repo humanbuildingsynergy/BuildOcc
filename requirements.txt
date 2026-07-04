@@ -1,0 +1,20 @@
+# Core runtime dependencies for buildocc
+# Generated from pyproject.toml [project.dependencies]
+# Install: pip install -r requirements.txt
+#
+# Optional providers:
+#   Google Gemini: pip install "buildocc[google]"  or  pip install google-generativeai>=0.8
+#   Ollama: no extra package needed (uses openai package with a local base_url)
+
+pydantic>=2.0
+anthropic>=0.30
+openai>=1.30
+fastapi>=0.111
+uvicorn[standard]>=0.30
+httpx>=0.27
+sqlalchemy>=2.0
+mcp>=1.0
+pandas>=2.1
+numpy>=1.26
+python-dotenv>=1.0
+pyyaml>=6.0

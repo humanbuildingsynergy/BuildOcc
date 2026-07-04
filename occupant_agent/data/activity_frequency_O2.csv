@@ -1,0 +1,51 @@
+trcode,total_weighted_min,n_episodes,mean_duration_min,description,occupancy,room,devices_on,pct_diary_time,cum_pct
+010101,13609131298811.371,5179,324.5114887043831,Sleeping,home,bedroom,[],44.5,44.5
+120303,5057110641216.868,4539,134.95637805684072,Computer use for leisure (not games),home,living_room,['computer'],16.54,61.04
+110101,1569429087912.6318,5429,36.484435439307425,Eating and drinking,ambiguous,kitchen,[],5.13,66.17
+120312,750890044487.4282,1326,76.08748114630468,"Knitting, sewing, or crocheting",home,living_room,[],2.46,68.63
+020201,750505965622.6382,2659,33.550582925911996,Interior cleaning,home,living_room,['vacuum'],2.45,71.08
+010201,681567494517.9037,2755,31.142286751361162,"Washing, dressing, grooming",home,bathroom,['water_heater'],2.23,73.31
+120101,642412957499.7169,1043,81.22051773729626,Socializing and communicating with others,ambiguous,living_room,[],2.1,75.41
+120301,541803786939.5434,729,88.60219478737997,Watching TV,home,living_room,['tv'],1.77,77.18
+020501,475977046994.64514,587,98.86201022146507,Vehicle repair/maintenance,home,garage,[],1.56,78.74
+020101,464347659318.582,779,73.02695763799743,Food and drink preparation,home,kitchen,"['oven', 'range', 'range_hood', 'microwave']",1.52,80.26
+120307,299317163820.4608,447,84.56375838926175,Listening to the radio,home,any,['radio'],0.98,81.24
+070104,261296198849.71994,655,48.16030534351145,"Shopping, except groceries/food/gas",away,outside,[],0.85,82.09
+120308,252765445450.8786,375,84.29333333333334,Listening to/playing music (not radio),home,any,['stereo'],0.83,82.92
+020102,250527560824.44403,594,53.51178451178451,Food presentation,home,kitchen,['microwave'],0.82,83.74
+020203,238818132008.72348,1008,28.543650793650794,"Sewing, repairing textiles",home,living_room,[],0.78,84.52
+020902,184528185163.15872,553,44.52802893309222,Household activities (any),home,any,[],0.6,85.12
+070101,147948486226.4758,386,46.082901554404145,Grocery shopping,away,outside,[],0.48,85.6
+130131,147255976903.2401,375,48.248,Sports/exercise (any),ambiguous,outside,[],0.48,86.08
+180704,136080811351.83601,877,18.395667046750287,Traveling (any),away,outside,[],0.44,86.52
+010301,128937957996.92715,440,34.70681818181818,Health-related self care,home,bathroom,[],0.42,86.94
+500106,120038098142.66835,193,74.87564766839378,Data collection limitation (any),ambiguous,any,[],0.39,87.33
+181101,117846828667.2275,605,26.236363636363638,Travel related to socializing/leisure,away,outside,[],0.39,87.72
+020601,106029090706.45035,623,19.906902086677366,Financial management,home,any,['computer'],0.35,88.07
+140101,105662050481.31232,208,96.3173076923077,Attending religious services,away,outside,[],0.35,88.42
+020103,104056851148.38777,105,116.36190476190477,Kitchen and food clean-up,home,kitchen,['dishwasher'],0.34,88.76
+140102,103679221629.16408,239,46.0836820083682,Participation in religious practices,ambiguous,any,[],0.34,89.1
+020904,102859781180.48984,276,43.04710144927536,Household activities (any),home,any,[],0.34,89.44
+020301,97975920637.8034,93,120.38709677419355,"Lawn, garden, and houseplants",home,outside,[],0.32,89.76
+020602,90935355181.79095,329,36.87537993920973,Household and personal organization,home,any,[],0.3,90.06
+010102,89388354046.07648,140,82.35,Sleeplessness,home,bedroom,[],0.29,90.35
+500101,88215376238.09103,239,53.72384937238494,Insufficient detail in verbatim,ambiguous,any,[],0.29,90.64
+080401,87209607610.58904,132,62.68181818181818,Professional services (any),away,outside,[],0.29,90.93
+181201,79304575245.42046,462,23.12987012987013,Travel related to sports/exercise/recreation,away,outside,[],0.26,91.19
+020701,77132268867.86008,95,103.67368421052632,"Seasonal decorating (e.g., Christmas)",home,living_room,[],0.25,91.44
+180701,76907409374.12552,648,14.876543209876543,Travel related to consumer purchases,away,outside,[],0.25,91.69
+030401,72042827471.27005,145,48.08965517241379,Caring for HH members (any),home,any,[],0.24,91.93
+120309,68358875988.61151,72,126.11111111111111,Playing musical instruments,home,living_room,[],0.22,92.15
+160101,66738159838.913734,234,36.56410256410256,Telephone calls to/from family members,home,any,[],0.22,92.37
+020901,64552629030.908394,150,53.96,Household activities (any),home,any,[],0.21,92.58
+020401,63613346687.87444,105,81.68571428571428,"Interior arrangement, decoration, repairs",home,any,[],0.21,92.79
+120201,55575665364.70662,52,168.8653846153846,Attending performing arts,away,outside,[],0.18,92.97
+020402,54891060223.62065,54,153.05555555555554,Building and repairing furniture,home,garage,[],0.18,93.15
+130114,52872048049.6303,35,214.28571428571428,Playing volleyball,away,outside,[],0.17,93.32
+020104,50513367180.331375,213,26.328638497652584,Food prep (any),home,kitchen,['microwave'],0.17,93.49
+040103,50141509781.987595,68,99.05882352941177,Playing with non-HH children,away,outside,[],0.16,93.65
+180804,49228856884.14099,188,25.106382978723403,Traveling (any),away,outside,[],0.16,93.81
+159999,45585895787.57444,51,124.58823529411765,Volunteer activities (any),away,outside,[],0.15,93.96
+180703,41918362770.39847,294,19.653061224489797,Traveling (any),away,outside,[],0.14,94.1
+181301,41129733914.95221,299,16.906354515050168,Travel related to religious/spiritual activities,away,outside,[],0.13,94.23
+130134,38930850580.158035,118,41.8728813559322,Sports/exercise (any),ambiguous,outside,[],0.13,94.36

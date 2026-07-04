@@ -1,0 +1,51 @@
+trcode,total_weighted_min,n_episodes,mean_duration_min,description,occupancy,room,devices_on,pct_diary_time,cum_pct
+010101,17533666938279.934,4564,318.8060911481157,Sleeping,home,bedroom,[],40.92,40.92
+050101,8494447815993.954,2762,195.40188269370023,"Work, main job",ambiguous,outside,[],19.82,60.74
+120303,2839873398369.51,2453,99.9160211985324,Computer use for leisure (not games),home,living_room,['computer'],6.63,67.37
+110101,1795384427789.2185,4360,34.67591743119266,Eating and drinking,ambiguous,kitchen,[],4.19,71.56
+010201,1046225720670.3389,2887,28.033598891582958,"Washing, dressing, grooming",home,bathroom,['water_heater'],2.44,74.0
+020201,863908200867.7649,2329,31.959209961356805,Interior cleaning,home,living_room,['vacuum'],2.02,76.02
+120101,836789645714.5599,1053,75.78252611585945,Socializing and communicating with others,ambiguous,living_room,[],1.95,77.97
+180501,589060400119.2192,1416,25.097457627118644,"Travel related to work, main job",away,outside,[],1.37,79.34
+030101,583673664010.8342,2122,26.04335532516494,Physical care for HH children,home,any,[],1.36,80.7
+020101,539840463700.49414,699,80.81115879828326,Food and drink preparation,home,kitchen,"['oven', 'range', 'range_hood', 'microwave']",1.26,81.96
+120301,466298563255.35144,494,67.53441295546558,Watching TV,home,living_room,['tv'],1.09,83.05
+030103,354331097035.75415,502,72.84262948207171,"Playing with HH children, not sports",home,living_room,[],0.83,83.88
+180301,337345390377.6142,1588,15.670025188916876,Travel related to caring for HH children,away,outside,[],0.79,84.67
+070104,265441212400.13382,524,47.64885496183206,"Shopping, except groceries/food/gas",away,outside,[],0.62,85.29
+020102,263279775643.48236,571,47.79334500875657,Food presentation,home,kitchen,['microwave'],0.61,85.9
+020203,239143087884.49646,744,27.990591397849464,"Sewing, repairing textiles",home,living_room,[],0.56,86.46
+120307,204881082719.6883,242,81.11570247933884,Listening to the radio,home,any,['radio'],0.48,86.94
+120312,195358928154.46753,361,53.06094182825485,"Knitting, sewing, or crocheting",home,living_room,[],0.46,87.4
+020501,194586771542.47043,205,105.8,Vehicle repair/maintenance,home,garage,[],0.45,87.85
+070101,192218295507.91962,366,46.568306010928964,Grocery shopping,away,outside,[],0.45,88.3
+500101,187898543945.43762,312,54.43910256410256,Insufficient detail in verbatim,ambiguous,any,[],0.44,88.74
+030110,179113782061.80014,152,128.92105263157896,Waiting for/with HH children,ambiguous,any,[],0.42,89.16
+181101,170439344083.80725,628,22.353503184713375,Travel related to socializing/leisure,away,outside,[],0.4,89.56
+050102,158944061703.06448,101,124.48514851485149,"Work, other job(s)",ambiguous,outside,[],0.37,89.93
+020902,155726596914.72174,448,35.270089285714285,Household activities (any),home,any,[],0.36,90.29
+180704,126313582576.7501,689,16.74310595065312,Traveling (any),away,outside,[],0.29,90.58
+120308,124984188698.79599,266,43.515037593984964,Listening to/playing music (not radio),home,any,['stereo'],0.29,90.87
+120201,120677499732.20862,73,199.4794520547945,Attending performing arts,away,outside,[],0.28,91.15
+181201,107620246494.7513,403,23.34739454094293,Travel related to sports/exercise/recreation,away,outside,[],0.25,91.4
+020601,102822881683.3831,413,19.72639225181598,Financial management,home,any,['computer'],0.24,91.64
+140101,99312323434.39174,129,96.81395348837209,Attending religious services,away,outside,[],0.23,91.87
+180701,96968735295.06076,607,13.990115321252059,Travel related to consumer purchases,away,outside,[],0.23,92.1
+020301,92489585346.78314,57,151.140350877193,"Lawn, garden, and houseplants",home,outside,[],0.22,92.32
+030201,90817626798.48254,138,50.45652173913044,Physical care for HH adults,home,any,[],0.21,92.53
+180703,87383046518.90068,530,15.5,Traveling (any),away,outside,[],0.2,92.73
+120499,79383452294.72546,64,134.140625,"Reading, n.e.c.",home,any,[],0.19,92.92
+030112,78595055760.26448,760,7.131578947368421,HH childcare (any),home,any,[],0.18,93.1
+500106,77907078495.02267,101,72.36633663366337,Data collection limitation (any),ambiguous,any,[],0.18,93.28
+130131,77080034242.80887,152,43.03947368421053,Sports/exercise (any),ambiguous,outside,[],0.18,93.46
+030106,76438958996.27853,198,29.166666666666668,Talking with/listening to HH children,home,any,[],0.18,93.64
+020701,75919877861.67714,72,86.26388888888889,"Seasonal decorating (e.g., Christmas)",home,living_room,[],0.18,93.82
+020602,73553776307.12962,214,31.593457943925234,Household and personal organization,home,any,[],0.17,93.99
+030109,68980818504.56442,125,52.592,Attending HH children's events,away,outside,[],0.16,94.15
+060301,68314495544.20527,34,110.73529411764706,Research/homework,home,any,['computer'],0.16,94.31
+189999,63356276487.48997,163,41.04907975460123,"Traveling, n.e.c.",away,outside,[],0.15,94.46
+030102,56241910123.28615,223,27.076233183856502,Reading to/with HH children,home,living_room,[],0.13,94.59
+020401,52991603791.187965,51,105.92156862745098,"Interior arrangement, decoration, repairs",home,any,[],0.12,94.71
+010102,52382688395.50596,92,53.23913043478261,Sleeplessness,home,bedroom,[],0.12,94.83
+181301,51003403421.03035,271,16.863468634686345,Travel related to religious/spiritual activities,away,outside,[],0.12,94.95
+130132,50021802073.17844,42,137.02380952380952,Sports/exercise (any),ambiguous,outside,[],0.12,95.07

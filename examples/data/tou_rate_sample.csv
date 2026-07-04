@@ -1,0 +1,4 @@
+hour_start,hour_end,rate_kwh,label
+0,16,0.08,off-peak
+16,21,0.22,peak
+21,24,0.08,off-peak

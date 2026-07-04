@@ -1,0 +1,11 @@
+# Development dependencies for buildocc
+# Generated from pyproject.toml [project.optional-dependencies.dev]
+# Install: pip install -r requirements-dev.txt
+# (also installs core deps via -r requirements.txt)
+
+-r requirements.txt
+
+pytest>=8.0
+pytest-asyncio>=0.23
+ruff>=0.4
+mypy>=1.10
