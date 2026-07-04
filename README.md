@@ -478,17 +478,39 @@ docs/
 
 v1 is complete. Phase 2 (validation against CASAS and Pecan Street behavioral data) is next.
 
-## Citation
+## How to cite
+
+If you use BuildOcc in your research, please cite **both** the software release and the accompanying paper.
+
+**Software (this release):**
+
+> Jung, W. (2026). *BuildOcc: ATUS-grounded LLM occupant agents for building energy simulation* (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.21192895
 
 ```bibtex
-@article{jung2026occupantagent,
-  title   = {BuildOcc: A Large Language Model Occupant Agent Platform for Building Energy Research},
-  author  = {Jung, Wooyoung},
-  journal = {SoftwareX},
-  year    = {2026},
-  note    = {Under review}
+@software{jung2026buildocc,
+  author    = {Jung, Wooyoung},
+  title     = {BuildOcc: ATUS-grounded LLM occupant agents for building energy simulation},
+  version   = {1.0.0},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.21192895},
+  url       = {https://doi.org/10.5281/zenodo.21192895}
 }
 ```
+
+**Paper (SoftwareX — publication details to be announced):**
+
+```bibtex
+@article{jung2026buildoccpaper,
+  author  = {Jung, Wooyoung},
+  title   = {BuildOcc: A Large Language Model Occupant Agent Platform for Building Energy Research},
+  journal = {SoftwareX},
+  year    = {2026},
+  note    = {To be announced}
+}
+```
+
+GitHub's **"Cite this repository"** button (repo sidebar) generates these automatically from [`CITATION.cff`](CITATION.cff).
 
 ## License
 
