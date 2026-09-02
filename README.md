@@ -484,17 +484,17 @@ If you use BuildOcc in your research, please cite **both** the software release 
 
 **Software (this release):**
 
-> Jung, W. (2026). *BuildOcc: ATUS-grounded LLM occupant agents for building energy simulation* (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.21192895
+> Jung, W. (2026). *BuildOcc: ATUS-grounded LLM occupant agents for building energy simulation* (v1.0.1). Zenodo. https://doi.org/10.5281/zenodo.22255938
 
 ```bibtex
 @software{jung2026buildocc,
   author    = {Jung, Wooyoung},
   title     = {BuildOcc: ATUS-grounded LLM occupant agents for building energy simulation},
-  version   = {1.0.0},
+  version   = {1.0.1},
   year      = {2026},
   publisher = {Zenodo},
-  doi       = {10.5281/zenodo.21192895},
-  url       = {https://doi.org/10.5281/zenodo.21192895}
+  doi       = {10.5281/zenodo.22255938},
+  url       = {https://doi.org/10.5281/zenodo.22255938}
 }
 ```
 

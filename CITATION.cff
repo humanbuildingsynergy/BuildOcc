@@ -12,8 +12,14 @@ repository-code: "https://github.com/humanbuildingsynergy/BuildOcc"
 license: Apache-2.0
 version: 1.0.1
 date-released: "2026-09-02"
-doi: "10.5281/zenodo.21192895"
+doi: "10.5281/zenodo.22255938"
 identifiers:
+  - type: doi
+    value: "10.5281/zenodo.22255938"
+    description: "Archived v1.0.1 release (Zenodo)"
+  - type: doi
+    value: "10.5281/zenodo.21192894"
+    description: "Concept DOI — always resolves to the latest version"
   - type: doi
     value: "10.5281/zenodo.21192895"
     description: "Archived v1.0.0 release (Zenodo)"
