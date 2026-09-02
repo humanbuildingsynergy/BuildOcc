@@ -34,8 +34,11 @@ RESP_COLS = {
     "TUMONTH",
     "TUDIARYDATE",    # diary date (YYYYMMDD)
     "TUDIARYDAY",     # day of week (1=Sunday … 7=Saturday)
-    "TELFS",          # labor force status (1=employed@work, 2=employed not@work, 3=unemployed, 4=not in LF)
-    "TERET1",         # retirement (1=retired, 2=not retired, -1=N/A)
+    "TELFS",          # labor force status (1=employed@work, 2=employed absent,
+                      #  3=unemployed-layoff, 4=unemployed-looking, 5=not in labor force)
+    "TERET1",         # "do you currently want a job?" (1=yes/maybe, 2=no, 3=has a job)
+                      #  Universe: TELFS=5 AND TEAGE>=50. NOT a retirement flag --
+                      #  see 2023 ATUS Data Dictionary. Retained for reference only.
     "TRNUMHOU",       # number of persons in household
     "TRSPPRES",       # spouse/partner present (1=married spouse, 2=unmarried partner, 3=neither)
     "TRHHCHILD",      # HH children < 18 (1=yes, 2=no)
@@ -66,7 +69,7 @@ STRATUM_LABELS = {
     "O1": "Employed adult, single, 25–44",
     "O2": "Retired/not-in-LF, coupled, 65+",
     "O3": "Employed parent with children <18, 35–54",
-    "O4": "Unemployed/not-in-LF (non-retired), 25–44",
+    "O4": "Not employed (unemployed or not-in-labor-force), 25–44",
 }
 
 # ── Loaders ─────────────────────────────────────────────────────────────────
@@ -154,15 +157,14 @@ def classify_stratum(df: pd.DataFrame) -> pd.Series:
 
     Priority when a respondent matches multiple definitions: O1 > O2 > O3 > O4.
     This is conservative — O1 (employed single 25-44) takes precedence over
-    O4 (not-in-LF 25-44) for edge cases like leave-of-absence.
+    O4 (not employed, 25-44) for edge cases like leave-of-absence.
 
     See docs/methodology_decisions.md D9 for rationale.
     """
     age      = df["teage"]
     employed = df["telfs"].isin([1, 2])
-    unemployed = df["telfs"] == 3
-    not_in_lf  = df["telfs"] == 4
-    retired    = df["teret1"] == 1
+    unemployed = df["telfs"].isin([3, 4])   # 3 = on layoff, 4 = looking
+    not_in_lf  = df["telfs"] == 5           # NOT 4 -- see TELFS codebook above
     coupled    = df["trsppres"].isin([1, 2])
     single     = df["trsppres"] == 3
     has_kids   = df["trhhchild"] == 1
@@ -170,7 +172,10 @@ def classify_stratum(df: pd.DataFrame) -> pd.Series:
     p1 = (age >= 25) & (age <= 44) & employed & single
     p2 = (age >= 65) & ~employed & coupled
     p3 = (age >= 35) & (age <= 54) & employed & has_kids
-    p4 = (age >= 25) & (age <= 44) & (unemployed | (not_in_lf & ~retired))
+    # O4 = not employed at ages 25-44. No retirement screen is applied: ATUS's only
+    # retirement-adjacent variable (TERET1) asks whether the respondent wants a job and
+    # is in universe solely for TELFS=5 aged 50+, so it cannot speak to this age band.
+    p4 = (age >= 25) & (age <= 44) & (unemployed | not_in_lf)
 
     result = pd.Series("other", index=df.index, dtype=str)
     result[p4] = "O4"

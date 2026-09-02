@@ -20,15 +20,16 @@ At each 15-minute timestep the scheduler:
   2. Samples a specific tier-3 code from the pool of codes in that category,
      weighted by pct_diary_time from activity_frequency_{stratum}.csv.
 
-Eight activity categories:
+Nine activity categories (ATUS 2023 lexicon):
   sleeping  → codes starting with "0101"
   work      → codes starting with "05"
-  food_prep → codes starting with "0201"
-  laundry   → code "020202" exactly
-  tv        → code "120301" exactly
+  food_prep → codes starting with "0202" (Food & Drink Prep/Presentation/Clean-up)
+  laundry   → code "020102" exactly
+  tv        → codes "120303"/"120304" (Television and movies)
   eating    → codes starting with "1101"
   exercise  → codes starting with "13"
-  other     → everything else (computer leisure, socializing, grooming, travel…)
+  travel    → codes starting with "18"
+  other     → everything else (computer leisure, socializing, grooming…)
 
 Data sources (run scripts/atus/analyze.py to regenerate):
   occupant_agent/data/time_at_activity.csv          — hourly time-in-activity rates
@@ -59,7 +60,7 @@ from occupant_agent.core.registry import register_scheduler
 
 Stratum = Literal["O1", "O2", "O3", "O4"]
 
-_CATEGORY_NAMES = ["sleeping", "work", "food_prep", "laundry", "tv", "eating", "exercise", "other"]
+_CATEGORY_NAMES = ["sleeping", "work", "food_prep", "laundry", "tv", "eating", "exercise", "travel", "other"]
 
 def _matches_category(code: str, cat: str) -> bool:
     """Return True if the ATUS code belongs to the named tod category."""
@@ -69,15 +70,17 @@ def _matches_category(code: str, cat: str) -> bool:
     if cat == "work":
         return code.startswith("05")
     if cat == "food_prep":
-        return code.startswith("0201")
+        return code.startswith("0202")          # Food & Drink Prep/Presentation/Clean-up
     if cat == "laundry":
-        return code == "020202"
+        return code == "020102"                 # Laundry
     if cat == "tv":
-        return code == "120301"
+        return code in ("120303", "120304")     # Television and movies (+ religious TV)
     if cat == "eating":
         return code.startswith("1101")
     if cat == "exercise":
         return code.startswith("13")
+    if cat == "travel":
+        return code.startswith("18")
     return False  # "other" is the residual
 
 def _get_category(code: str) -> str:
@@ -93,11 +96,12 @@ def _get_category(code: str) -> str:
 _CATEGORY_FALLBACKS: dict[str, str] = {
     "sleeping":  "010101",
     "work":      "050101",
-    "food_prep": "020101",
-    "laundry":   "020202",  # the main fallback case
-    "tv":        "120301",
+    "food_prep": "020201",  # Food and drink preparation
+    "laundry":   "020102",  # Laundry (the main fallback case)
+    "tv":        "120303",  # Television and movies
     "eating":    "110101",
     "exercise":  "130101",
+    "travel":    "180501",  # travel related to work (commute) — most common travel code
     "other":     "010201",  # grooming — neutral catch-all
 }
 
@@ -170,8 +174,10 @@ class ActivityScheduler(BaseScheduler):
         )
         total = sum(raw.values())
         if total == 0:
-            if 0 <= hour <= 3:
-                return {cat: (1.0 if cat == "sleeping" else 0.0) for cat in _CATEGORY_NAMES}
+            # No reference mass at this hour. The bundled tables now cover all 24
+            # hours (every (stratum, day_type, hour) cell sums to 100), so this is
+            # reachable only for a caller-supplied outputs_dir with sparse data.
+            # Fall back to uniform rather than inventing a category.
             return {cat: 1 / len(_CATEGORY_NAMES) for cat in _CATEGORY_NAMES}
         return {cat: w / total for cat, w in raw.items()}
 
@@ -256,10 +262,10 @@ class ActivityScheduler(BaseScheduler):
         cats = list(weights.keys())
         wts = list(weights.values())
         if sum(wts) == 0:
-            # Hours 0-3 are all-zero in the bundled CSV (ATUS extended-hour
-            # encoding limitation). Real ATUS data shows >80% sleeping at these
-            # hours, so use sleeping as the fallback rather than uniform random.
-            return "sleeping" if 0 <= hour <= 3 else self._rng.choice(cats)
+            # Unreachable for the bundled tables (all 24 hours carry mass since the
+            # 04:00 diary-axis fix); retained for caller-supplied sparse outputs_dir.
+            # Draws uniformly instead of asserting a category the data does not support.
+            return self._rng.choice(cats)
         return self._rng.choices(cats, weights=wts, k=1)[0]
 
     def _sample_code(self, category: str) -> str:

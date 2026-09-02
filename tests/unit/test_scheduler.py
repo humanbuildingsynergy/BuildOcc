@@ -72,15 +72,18 @@ def test_sample_hours_0_to_3_always_sleeping():
 
 
 def test_category_weights_hours_0_to_3_sleeping_dominant():
-    # category_weights() should reflect the sleeping fallback for hours 0-3.
+    # With the corrected data, category_weights() at hours 0-3 is the real ATUS
+    # distribution (sleeping ~0.85-0.95, dominant but not 1.0), no longer the forced
+    # all-sleeping fallback that only fired when the hour was all-zero.
     s = ActivityScheduler("O1", seed=0)
     for h in range(4):
         weights = s.category_weights(hour=h)
-        assert weights["sleeping"] == 1.0, (
-            f"Expected sleeping=1.0 at hour {h}, got {weights['sleeping']}"
+        assert abs(sum(weights.values()) - 1.0) < 1e-6
+        assert weights["sleeping"] > 0.8, (
+            f"Expected sleeping to dominate at hour {h}, got {weights['sleeping']:.3f}"
         )
-        assert all(weights[cat] == 0.0 for cat in weights if cat != "sleeping"), (
-            f"Expected all non-sleeping weights=0.0 at hour {h}"
+        assert weights["sleeping"] == max(weights.values()), (
+            f"Expected sleeping to be the modal category at hour {h}"
         )
 
 
@@ -126,7 +129,7 @@ def test_category_weights_all_nonnegative():
 
 
 def test_category_weights_returns_all_categories():
-    expected = {"sleeping", "work", "food_prep", "laundry", "tv", "eating", "exercise", "other"}
+    expected = {"sleeping", "work", "food_prep", "laundry", "tv", "eating", "exercise", "travel", "other"}
     s = ActivityScheduler("O1", seed=42)
     assert set(s.category_weights(hour=9).keys()) == expected
 

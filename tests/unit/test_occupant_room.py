@@ -61,14 +61,14 @@ class TestSuggestRoomDeterministic:
     def test_laundry_maps_to_laundry_room(self):
         agent = _make_agent("O3")
         env = make_env(rooms=_rooms("living_room", "kitchen", "laundry_room", occupied="living_room"))
-        room, is_det = agent._suggest_room("020202", env)  # Laundry
+        room, is_det = agent._suggest_room("020102", env)  # Laundry
         assert room == "laundry_room"
         assert is_det is True
 
     def test_laundry_returns_none_when_no_laundry_room(self):
         agent = _make_agent("O1")
         env = make_env(rooms=_rooms("living_room", "bedroom", "kitchen", occupied="living_room"))
-        room, is_det = agent._suggest_room("020202", env)
+        room, is_det = agent._suggest_room("020102", env)
         assert room is None
         assert is_det is False
 
@@ -79,7 +79,7 @@ class TestSuggestRoomSoft:
     def test_food_prep_maps_to_kitchen(self):
         agent = _make_agent()
         env = make_env(rooms=_rooms("living_room", "bedroom", "kitchen", occupied="living_room"))
-        room, is_det = agent._suggest_room("020101", env)  # Food and drink preparation
+        room, is_det = agent._suggest_room("020201", env)  # Food and drink preparation
         assert room == "kitchen"
         assert is_det is False
 
@@ -100,14 +100,14 @@ class TestSuggestRoomSoft:
     def test_tv_maps_to_living_room(self):
         agent = _make_agent()
         env = make_env(rooms=_rooms("living_room", "bedroom", "kitchen", occupied="bedroom"))
-        room, is_det = agent._suggest_room("120301", env)  # Watching TV
+        room, is_det = agent._suggest_room("120303", env)  # Television and movies
         assert room == "living_room"
         assert is_det is False
 
     def test_exercise_maps_to_living_room_when_home(self):
         agent = _make_agent(home_gym=True)
         env = make_env(rooms=_rooms("living_room", "bedroom", occupied="bedroom"))
-        room, is_det = agent._suggest_room("130120", env)  # Cardiovascular equipment
+        room, is_det = agent._suggest_room("130128", env)  # Cardiovascular equipment
         assert room == "living_room"
         assert is_det is False
 
@@ -224,7 +224,7 @@ class TestAutoMove:
         env = make_env(rooms=_rooms("living_room", "kitchen", "laundry_room", occupied="living_room"))
 
         with patch.object(agent, "_call") as mock_call:
-            action = agent.step(env, atus_code="020202")
+            action = agent.step(env, atus_code="020102")
 
         assert action.action_type == "move_room"
         assert action.target_id == "laundry_room"
@@ -276,7 +276,7 @@ class TestSoftHint:
             return self._fake_llm_response()
 
         with patch.object(agent, "_call", side_effect=fake_call):
-            agent.step(env, atus_code="020101")
+            agent.step(env, atus_code="020201")
 
         assert captured_user_prompt, "LLM should have been called"
         assert "kitchen" in captured_user_prompt[0]
@@ -297,7 +297,7 @@ class TestSoftHint:
             }
 
         with patch.object(agent, "_call", side_effect=fake_call):
-            agent.step(env, atus_code="120301")
+            agent.step(env, atus_code="120303")
 
         assert "living room" in captured[0]
 
@@ -317,6 +317,6 @@ class TestSoftHint:
             }
 
         with patch.object(agent, "_call", side_effect=fake_call):
-            agent.step(env, atus_code="020101")
+            agent.step(env, atus_code="020201")
 
         assert "as expected" in captured[0]

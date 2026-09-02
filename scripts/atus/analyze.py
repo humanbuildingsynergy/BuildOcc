@@ -209,20 +209,21 @@ def time_of_day_distributions(df: pd.DataFrame) -> None:
     For each stratum, compute hourly participation rates for key device-triggering
     activity categories. These distributions become the persona's prior schedule.
 
-    Key categories:
-      sleeping (0101), food prep (0201), laundry (020202), TV (120301),
+    Key categories (2023 lexicon):
+      sleeping (0101), food prep (0202), laundry (020102), TV (120303/120304),
       work away (0501 + tewhere≠1), eating (1101)
     """
     print("\n── 4. Time-of-day distributions ──")
 
     CATEGORIES = {
         "sleeping":  lambda c: c.startswith("0101"),
-        "food_prep": lambda c: c.startswith("0201"),
-        "laundry":   lambda c: c == "020202",
-        "tv":        lambda c: c == "120301",
+        "food_prep": lambda c: c.startswith("0202"),           # 0202 Food & Drink Prep
+        "laundry":   lambda c: c == "020102",                  # 020102 Laundry
+        "tv":        lambda c: c in ("120303", "120304"),      # Television and movies (+ religious TV)
         "work":      lambda c: c.startswith("05"),
         "eating":    lambda c: c.startswith("1101"),
         "exercise":  lambda c: c.startswith("13"),
+        "travel":    lambda c: c.startswith("18"),
     }
 
     def parse_hour(t: str) -> float | None:
@@ -276,6 +277,37 @@ def time_of_day_distributions(df: pd.DataFrame) -> None:
 
 # ── 5. Time-at-activity distributions (correct grounding for Scheduler) ──────
 
+# ATUS diary time axis.
+# TUSTARTTIM/TUSTOPTIME are plain clock times "HH:MM:SS" in [00:00, 23:59]; the
+# diary day runs 04:00 → 04:00 next day and its ordering is carried by activity
+# sequence, NOT by an extended 24–27h hour code. To place every episode on one
+# monotonic axis we anchor the diary at 04:00 and map post-midnight times
+# (00:00–03:59) to the tail (24:00–27:59 → minutes 1440–1679).
+_DIARY_START_MIN = 4 * 60  # 04:00
+
+
+def _parse_clock_min(t: str) -> int | None:
+    """Parse an ATUS clock time 'HH:MM:SS' → minutes since 00:00 (0–1439)."""
+    try:
+        parts = t.strip().split(":")
+        return int(parts[0]) * 60 + int(parts[1])
+    except Exception:
+        return None
+
+
+def _to_diary_min(clock_min: int) -> int:
+    """Map a clock minute (0–1439) onto the 04:00-anchored diary axis (240–1679).
+    Times before 04:00 are the post-midnight tail of the same diary day."""
+    return clock_min + 1440 if clock_min < _DIARY_START_MIN else clock_min
+
+
+def _query_min(hour: int) -> int:
+    """Diary-axis minute at the half-hour mark of clock ``hour`` (0–23).
+    Hours 0–3 map to the post-midnight tail (24:30–27:30)."""
+    h = hour if hour >= 4 else hour + 24
+    return h * 60 + 30
+
+
 def time_at_activity(df: pd.DataFrame) -> None:
     """
     Compute what fraction of respondents are IN each activity category
@@ -299,14 +331,18 @@ def time_at_activity(df: pd.DataFrame) -> None:
     """
     print("\n── 5. Time-at-activity distributions (weekday / weekend split) ──")
 
+    # Codes follow the official ATUS 2023 lexicon (audit #2). The 02-series was
+    # previously shifted: 0201 is Housework (cleaning/laundry/sewing), 0202 is Food
+    # & Drink Prep/Presentation/Clean-up; and TV is 120303, not 120301 (Relaxing).
     CATEGORIES_MAP = {
         "sleeping":  lambda c: c.startswith("0101"),
         "work":      lambda c: c.startswith("05"),
-        "food_prep": lambda c: c.startswith("0201"),
-        "laundry":   lambda c: c == "020202",
-        "tv":        lambda c: c == "120301",
+        "food_prep": lambda c: c.startswith("0202"),          # 02 Food & Drink Prep/Presentation/Clean-up
+        "laundry":   lambda c: c == "020102",                 # 020102 Laundry
+        "tv":        lambda c: c in ("120303", "120304"),     # Television and movies (+ religious TV)
         "eating":    lambda c: c.startswith("1101"),
         "exercise":  lambda c: c.startswith("13"),
+        "travel":    lambda c: c.startswith("18"),
     }
 
     def _cat(code: str) -> str:
@@ -315,36 +351,34 @@ def time_at_activity(df: pd.DataFrame) -> None:
                 return name
         return "other"
 
-    def _parse_min(t: str) -> int | None:
-        """Parse ATUS HH:MM:SS (extended hours allowed) → integer minutes."""
-        try:
-            parts = t.strip().split(":")
-            return int(parts[0]) * 60 + int(parts[1])
-        except Exception:
-            return None
-
-    # Convert clock hour 0–23 to ATUS extended minutes at the half-hour mark:
-    #   hours 4–23 → h*60 + 30
-    #   hours 0–3  → (h+24)*60 + 30   (ATUS 24:xx–27:xx encoding)
-    def _query_min(hour: int) -> int:
-        h = hour if hour >= 4 else hour + 24
-        return h * 60 + 30
-
     def _day_type(d: int) -> str:
         """TUDIARYDAY: 1=Sun, 2=Mon, …, 7=Sat."""
         return "weekend" if d in {1, 7} else "weekday"
 
     df2 = df.copy()
-    df2["start_min"] = df2["tustarttim"].apply(_parse_min)
-    df2["stop_min"]  = df2["tustoptime"].apply(_parse_min)
+    df2["start_min"] = df2["tustarttim"].apply(_parse_clock_min)
+    df2["stop_min"]  = df2["tustoptime"].apply(_parse_clock_min)
     df2["category"]  = df2["trcode"].apply(_cat)
     df2["weighted"]  = df2["tufinlwgt"]
     df2["day_type"]  = df2["tudiaryday"].apply(_day_type)
+    # Fold holidays into 'weekend' — a holiday behaves like a day off, so pooling it
+    # with weekdays contaminates the weekday work distribution (audit #11; dev plan §2.7).
+    df2.loc[pd.to_numeric(df2["trholiday"], errors="coerce") == 1, "day_type"] = "weekend"
 
     df2 = df2.dropna(subset=["start_min", "stop_min"])
     df2["start_min"] = df2["start_min"].astype(int)
     df2["stop_min"]  = df2["stop_min"].astype(int)
-    df2 = df2[df2["stop_min"] > df2["start_min"]]
+
+    # Map both endpoints onto the 04:00-anchored diary axis, then unwrap episodes
+    # that cross midnight (or end at 04:00) so their full [start, stop) span is
+    # preserved. The old code parsed clock times as if they were extended 24–27h
+    # hours and dropped every ``stop <= start`` row — which silently deleted all
+    # overnight sleep and zeroed hours 0–3 in every distribution
+    # (see docs/results_integrity_audit.md #1).
+    df2["start_min"] = df2["start_min"].map(_to_diary_min)
+    df2["stop_min"]  = df2["stop_min"].map(_to_diary_min)
+    df2.loc[df2["stop_min"] < df2["start_min"], "stop_min"] += 1440
+    df2 = df2[df2["stop_min"] > df2["start_min"]]  # drop only zero-length episodes
 
     all_outputs = []
     all_cats = list(CATEGORIES_MAP.keys()) + ["other"]
@@ -404,7 +438,6 @@ def time_at_activity(df: pd.DataFrame) -> None:
         out = OUTPUT_DIR / "time_at_activity.csv"
         combined.to_csv(out, index=False)
         print(f"\n  Saved → {out}  (columns: hour, category, weighted_pct, stratum, day_type)")
-
 
 # ── 6. Schedule peak hours (for persona.py SCHEDULE_PRIORS alignment) ────────
 
