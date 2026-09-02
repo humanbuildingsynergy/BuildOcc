@@ -10,8 +10,8 @@ authors:
     # orcid: "https://orcid.org/0000-0000-0000-0000"  # TODO: add your ORCID iD
 repository-code: "https://github.com/humanbuildingsynergy/BuildOcc"
 license: Apache-2.0
-version: 1.0.0
-date-released: "2026-07-04"
+version: 1.0.1
+date-released: "2026-09-02"
 doi: "10.5281/zenodo.21192895"
 identifiers:
   - type: doi
