@@ -37,3 +37,15 @@ abstract: >-
   scheduling across four demographic strata, persona generation with EIA RECS
   appliance priors, a Park et al. (2023) memory stream, a demand-response signal
   typology, and two-tier behavioral and energy validation metrics.
+
+preferred-citation:
+  type: article
+  title: "BuildOcc: A Large Language Model Occupant Agent Platform for Building Energy Research"
+  authors:
+    - family-names: Jung
+      given-names: Wooyoung
+      affiliation: "University of Arizona"
+  year: 2026
+  doi: "10.48550/arXiv.2609.02729"
+  url: "https://arxiv.org/abs/2609.02729"
+  notes: "Preprint. Under review at SoftwareX; update to the journal DOI on acceptance."

@@ -498,15 +498,21 @@ If you use BuildOcc in your research, please cite **both** the software release 
 }
 ```
 
-**Paper (SoftwareX — publication details to be announced):**
+**Paper (preprint; under review at SoftwareX):**
+
+> Jung, W. (2026). *BuildOcc: A Large Language Model Occupant Agent Platform for Building Energy Research*. arXiv:2609.02729. https://doi.org/10.48550/arXiv.2609.02729
 
 ```bibtex
 @article{jung2026buildoccpaper,
-  author  = {Jung, Wooyoung},
-  title   = {BuildOcc: A Large Language Model Occupant Agent Platform for Building Energy Research},
-  journal = {SoftwareX},
-  year    = {2026},
-  note    = {To be announced}
+  author       = {Jung, Wooyoung},
+  title        = {BuildOcc: A Large Language Model Occupant Agent Platform for Building Energy Research},
+  year         = {2026},
+  eprint       = {2609.02729},
+  archivePrefix= {arXiv},
+  primaryClass = {cs.HC},
+  doi          = {10.48550/arXiv.2609.02729},
+  url          = {https://arxiv.org/abs/2609.02729},
+  note         = {Preprint; under review at SoftwareX}
 }
 ```
 
