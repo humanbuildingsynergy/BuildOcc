@@ -1,0 +1,5 @@
+stratum,total_steps,do_nothing_pct,adjust_thermostat_pct,toggle_device_pct,move_room_pct,unknown_pct,mean_peak_setpoint_c
+O1,288,75.3,2.4,6.2,16.0,0.0,23.22
+O2,288,60.1,2.1,13.9,24.0,0.0,23.55
+O3,288,77.1,2.1,4.9,16.0,0.0,23.36
+O4,288,67.7,1.7,11.1,19.4,0.0,23.23

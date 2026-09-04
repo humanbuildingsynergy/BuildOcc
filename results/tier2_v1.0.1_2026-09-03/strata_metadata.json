@@ -1,0 +1,12 @@
+{
+  "script": "scripts/validate_strata.py",
+  "timestamp_utc": "2026-09-04T00:00:24+00:00",
+  "provider": "anthropic",
+  "mock": false,
+  "seeds": 3,
+  "days": 1,
+  "start_date": "2025-08-11",
+  "package_version": "1.0.1",
+  "python": "3.12.2",
+  "zone_csv": "/Users/wooyoungjung/Library/CloudStorage/OneDrive-UniversityofArizona/Software/BuildOcc-Public/examples/data/zone_temps_sample.csv"
+}

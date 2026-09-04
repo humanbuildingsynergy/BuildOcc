@@ -15,7 +15,8 @@ from pathlib import Path
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-OUT_DIR = REPO_ROOT / "scripts" / "experiments" / "outputs"
+# Mock runs write to pytest's tmp_path, never to scripts/experiments/outputs/,
+# so they cannot overwrite real (paid) validation results.
 
 
 def _run(*args: str) -> subprocess.CompletedProcess:
@@ -27,10 +28,12 @@ def _run(*args: str) -> subprocess.CompletedProcess:
     )
 
 
-def test_validate_strata_mock() -> None:
+def test_validate_strata_mock(tmp_path) -> None:
+    OUT_DIR = tmp_path
     r = _run(
         "scripts/validate_strata.py",
         "--mock", "--seeds", "1", "--days", "1", "--force",
+        "--output-dir", str(tmp_path),
     )
     assert r.returncode == 0, f"validate_strata failed:\n{r.stderr}"
     assert (OUT_DIR / "strata_actions.csv").exists()
@@ -43,10 +46,12 @@ def test_validate_strata_mock() -> None:
         assert stratum in csv, f"Stratum {stratum} missing from strata_summary.csv"
 
 
-def test_validate_signals_mock() -> None:
+def test_validate_signals_mock(tmp_path) -> None:
+    OUT_DIR = tmp_path
     r = _run(
         "scripts/validate_signals.py",
         "--mock", "--seeds", "1", "--force",
+        "--output-dir", str(tmp_path),
     )
     assert r.returncode == 0, f"validate_signals failed:\n{r.stderr}"
     assert (OUT_DIR / "signal_responses.csv").exists()
@@ -58,10 +63,12 @@ def test_validate_signals_mock() -> None:
         assert sig in csv, f"Signal type {sig} missing from signal_responses.csv"
 
 
-def test_validate_strata_produces_four_strata() -> None:
+def test_validate_strata_produces_four_strata(tmp_path) -> None:
+    OUT_DIR = tmp_path
     r = _run(
         "scripts/validate_strata.py",
         "--mock", "--seeds", "1", "--days", "1", "--force",
+        "--output-dir", str(tmp_path),
     )
     assert r.returncode == 0
     import csv as csv_mod

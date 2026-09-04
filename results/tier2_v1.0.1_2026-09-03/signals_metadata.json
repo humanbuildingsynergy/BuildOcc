@@ -1,0 +1,11 @@
+{
+  "script": "scripts/validate_signals.py",
+  "timestamp_utc": "2026-09-03T23:45:24+00:00",
+  "provider": "anthropic",
+  "mock": false,
+  "seeds": 5,
+  "warmup_steps": 10,
+  "package_version": "1.0.1",
+  "python": "3.12.2",
+  "zone_csv": "/Users/wooyoungjung/Library/CloudStorage/OneDrive-UniversityofArizona/Software/BuildOcc-Public/examples/data/zone_temps_sample.csv"
+}
