@@ -1,0 +1,93 @@
+[validate_signals] Using EnergyPlus zone temps from zone_temps_sample.csv
+[validate_signals] 4 strata × 5 seeds = 20 agent runs, ~660 LLM calls (3 signals × (10 warmup + 1) each)
+[validate_signals] [1/20] O1 seed=0 ...
+  Signal A: rejected
+  Signal B: rejected
+  Signal C: rejected
+[validate_signals] [2/20] O1 seed=1 ...
+  Signal A: rejected
+  Signal B: accepted
+  Signal C: rejected
+[validate_signals] [3/20] O1 seed=2 ...
+  Signal A: rejected
+  Signal B: accepted
+  Signal C: rejected
+[validate_signals] [4/20] O1 seed=3 ...
+  Signal A: rejected
+  Signal B: rejected
+  Signal C: rejected
+[validate_signals] [5/20] O1 seed=4 ...
+  Signal A: rejected
+  Signal B: rejected
+  Signal C: rejected
+[validate_signals] [6/20] O2 seed=0 ...
+  Signal A: rejected
+  Signal B: accepted
+  Signal C: rejected
+[validate_signals] [7/20] O2 seed=1 ...
+  Signal A: rejected
+  Signal B: rejected
+  Signal C: rejected
+[validate_signals] [8/20] O2 seed=2 ...
+  Signal A: rejected
+  Signal B: rejected
+  Signal C: rejected
+[validate_signals] [9/20] O2 seed=3 ...
+  Signal A: rejected
+  Signal B: accepted
+  Signal C: rejected
+[validate_signals] [10/20] O2 seed=4 ...
+  Signal A: rejected
+  Signal B: rejected
+  Signal C: rejected
+[validate_signals] [11/20] O3 seed=0 ...
+  Signal A: rejected
+  Signal B: accepted
+  Signal C: rejected
+[validate_signals] [12/20] O3 seed=1 ...
+  Signal A: rejected
+  Signal B: rejected
+  Signal C: rejected
+[validate_signals] [13/20] O3 seed=2 ...
+  Signal A: rejected
+  Signal B: rejected
+  Signal C: rejected
+[validate_signals] [14/20] O3 seed=3 ...
+  Signal A: rejected
+  Signal B: rejected
+  Signal C: rejected
+[validate_signals] [15/20] O3 seed=4 ...
+  Signal A: rejected
+  Signal B: rejected
+  Signal C: rejected
+[validate_signals] [16/20] O4 seed=0 ...
+  Signal A: rejected
+  Signal B: rejected
+  Signal C: rejected
+[validate_signals] [17/20] O4 seed=1 ...
+  Signal A: rejected
+  Signal B: accepted
+  Signal C: rejected
+[validate_signals] [18/20] O4 seed=2 ...
+  Signal A: rejected
+  Signal B: rejected
+  Signal C: rejected
+[validate_signals] [19/20] O4 seed=3 ...
+  Signal A: accepted
+  Signal B: accepted
+  Signal C: rejected
+[validate_signals] [20/20] O4 seed=4 ...
+  Signal A: rejected
+  Signal B: accepted
+  Signal C: rejected
+
+[validate_signals] Wrote 60 rows → scripts/experiments/outputs/tier2_v1.0.1_2026-09-03/signal_responses.csv
+[validate_signals] Summary → scripts/experiments/outputs/tier2_v1.0.1_2026-09-03/signal_summary.csv
+
+Signal Compliance Matrix (accept %):
+  Stratum    Type A   Type B   Type C
+  O1             0%      40%       0%
+  O2             0%      40%       0%
+  O3             0%      20%       0%
+  O4            20%      60%       0%
+[validate_signals] Metadata → scripts/experiments/outputs/tier2_v1.0.1_2026-09-03/signals_metadata.json
