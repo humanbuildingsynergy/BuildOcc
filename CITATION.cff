@@ -7,7 +7,7 @@ authors:
     given-names: Wooyoung
     email: j2prosperous@gmail.com
     affiliation: "University of Arizona"
-    # orcid: "https://orcid.org/0000-0000-0000-0000"  # TODO: add your ORCID iD
+    orcid: "https://orcid.org/0000-0003-2746-4983"
 repository-code: "https://github.com/humanbuildingsynergy/BuildOcc"
 license: Apache-2.0
 version: 1.0.1
@@ -40,12 +40,15 @@ abstract: >-
 
 preferred-citation:
   type: article
-  title: "BuildOcc: A Large Language Model Occupant Agent Platform for Building Energy Research"
+  title: "BuildOcc: A large language model occupant agent platform for building energy research"
   authors:
     - family-names: Jung
       given-names: Wooyoung
       affiliation: "University of Arizona"
+      orcid: "https://orcid.org/0000-0003-2746-4983"
+  journal: "SoftwareX"
   year: 2026
-  doi: "10.48550/arXiv.2609.02729"
-  url: "https://arxiv.org/abs/2609.02729"
-  notes: "Preprint. Under review at SoftwareX; update to the journal DOI on acceptance."
+  start: "103068"
+  doi: "10.1016/j.softx.2026.103068"
+  url: "https://doi.org/10.1016/j.softx.2026.103068"
+  notes: "Open access. Accepted manuscript also on arXiv: https://arxiv.org/abs/2609.02729"

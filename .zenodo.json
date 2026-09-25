@@ -9,7 +9,7 @@
       "affiliation": "University of Arizona"
     }
   ],
-  "description": "Accompanying paper: Jung, W. (2026). BuildOcc: A Large Language Model Occupant Agent Platform for Building Energy Research. arXiv:2609.02729. https://doi.org/10.48550/arXiv.2609.02729 (preprint; under review at SoftwareX).\n\nBuildOcc provides LLM-based occupant agents for building energy simulation, grounded in American Time Use Survey (ATUS) microdata. It offers a Python agent library, a REST API, and an MCP server, with ATUS-grounded activity scheduling across four demographic strata, persona generation with EIA RECS appliance priors, a Park et al. (2023) memory stream, a demand-response signal typology, and two-tier behavioral and energy validation metrics.",
+  "description": "Accompanying paper: Jung, W. (2026). BuildOcc: A large language model occupant agent platform for building energy research. SoftwareX, 103068. https://doi.org/10.1016/j.softx.2026.103068 (open access; accepted manuscript also at arXiv:2609.02729).\n\nBuildOcc provides LLM-based occupant agents for building energy simulation, grounded in American Time Use Survey (ATUS) microdata. It offers a Python agent library, a REST API, and an MCP server, with ATUS-grounded activity scheduling across four demographic strata, persona generation with EIA RECS appliance priors, a Park et al. (2023) memory stream, a demand-response signal typology, and two-tier behavioral and energy validation metrics.",
   "keywords": [
     "occupant behavior",
     "building energy simulation",
@@ -19,6 +19,12 @@
     "demand response"
   ],
   "related_identifiers": [
+    {
+      "identifier": "10.1016/j.softx.2026.103068",
+      "relation": "isSupplementTo",
+      "resource_type": "publication-article",
+      "scheme": "doi"
+    },
     {
       "identifier": "10.48550/arXiv.2609.02729",
       "relation": "isSupplementTo",

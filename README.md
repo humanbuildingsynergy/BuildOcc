@@ -2,6 +2,8 @@
 
 ATUS-grounded LLM occupant agents for building energy simulation.
 
+**Paper:** Jung, W. (2026). BuildOcc: A large language model occupant agent platform for building energy research. *SoftwareX*, 103068. Open access at https://doi.org/10.1016/j.softx.2026.103068
+
 Agents are initialized from American Time Use Survey (ATUS) population microdata, reason over environment state using an LLM at each 15-minute timestep, and accumulate a memory stream that enables persistent behavior change. The library is exposed through a three-layer platform interface — Python library, REST API, and MCP server — so any building energy tool can integrate an occupant behavioral layer without bespoke coupling code.
 
 ## Architecture
@@ -498,23 +500,23 @@ If you use BuildOcc in your research, please cite **both** the software release 
 }
 ```
 
-**Paper (preprint; under review at SoftwareX):**
+**Paper (SoftwareX, open access):**
 
-> Jung, W. (2026). *BuildOcc: A Large Language Model Occupant Agent Platform for Building Energy Research*. arXiv:2609.02729. https://doi.org/10.48550/arXiv.2609.02729
+> Jung, W. (2026). BuildOcc: A large language model occupant agent platform for building energy research. *SoftwareX*, 103068. https://doi.org/10.1016/j.softx.2026.103068
 
 ```bibtex
 @article{jung2026buildoccpaper,
-  author       = {Jung, Wooyoung},
-  title        = {BuildOcc: A Large Language Model Occupant Agent Platform for Building Energy Research},
-  year         = {2026},
-  eprint       = {2609.02729},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.HC},
-  doi          = {10.48550/arXiv.2609.02729},
-  url          = {https://arxiv.org/abs/2609.02729},
-  note         = {Preprint; under review at SoftwareX}
+  author  = {Jung, Wooyoung},
+  title   = {BuildOcc: A large language model occupant agent platform for building energy research},
+  journal = {SoftwareX},
+  year    = {2026},
+  pages   = {103068},
+  doi     = {10.1016/j.softx.2026.103068},
+  url     = {https://doi.org/10.1016/j.softx.2026.103068}
 }
 ```
+
+The accepted manuscript is also available on arXiv: [arXiv:2609.02729](https://arxiv.org/abs/2609.02729).
 
 GitHub's **"Cite this repository"** button (repo sidebar) generates these automatically from [`CITATION.cff`](CITATION.cff).
 
